@@ -1,0 +1,99 @@
+/// Mixin helping defining both `width` and `height` simultaneously.
+///
+/// @author Hugo Giraudel
+///
+/// @access public
+///
+/// @param {Length} $width - Element’s `width`
+/// @param {Length} $height [$width] - Element’s `height`
+///
+/// @example scss - Usage
+///   .foo {
+///     @include size(10em);
+///   }
+///
+///   .bar {
+///     @include size(100%, 10em);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     width: 10em;
+///     height: 10em;
+///   }
+///
+///   .bar {
+///     width: 100%;
+///     height: 10em;
+///   }
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+
+@mixin mediaMin($breakpoint) {
+  $bp: map-get($breakpoints, $breakpoint);
+  @if($bp){
+    @media (min-width: #{$bp}) {
+      @content;
+    }
+  } @else {
+    @error 'Valore `#{$breakpoint}` non trovato. ' + 'Controllare che esista in `$breakpoints` map.';
+  }
+}
+@mixin mediaMax($breakpoint) {
+  $bp: map-get($breakpoints, $breakpoint);
+  @if($bp){
+    @media (max-width: #{$bp}) {
+      @content;
+    }
+  } @else {
+    @error 'Valore `#{$breakpoint}` non trovato. ' + 'Controllare che esista in `$breakpoints` map.';
+  }
+}
+
+@mixin _container($gutter: $grid-gutter) {
+  width: 100%;
+  padding-right: $gutter / 2;
+  padding-left: $gutter / 2;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin _container-max-widths($max-widths: $container-max-widths, $breakpoints: $breakpoints) {
+  @each $breakpoint, $container-max-width in $max-widths {
+    @include mediaMin($breakpoint) {
+      max-width: $container-max-width;
+    }
+  }
+}
+
+@mixin _row($gutter: $grid-gutter) {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
+  align-items: stretch;
+  // margin-right: -$gutter / 2;
+  // margin-left: -$gutter / 2;
+}
+@mixin vis-factory($thisPrefix) {
+  @include mediaMin($thisPrefix){
+
+    .show-#{$thisPrefix} {
+      display: block !important;
+    }
+    .row.show-#{$thisPrefix} {
+      display: -webkit-flex !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
+    }
+    .hide-#{$thisPrefix} {
+      display: none !important;
+    }
+  }
+}
+

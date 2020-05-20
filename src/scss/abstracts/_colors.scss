@@ -1,0 +1,107 @@
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+
+$grays: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$grays: map-merge(
+  (
+    "100": $gray-100,
+    "200": $gray-200,
+    "300": $gray-300,
+    "400": $gray-400,
+    "500": $gray-500,
+    "600": $gray-600,
+    "700": $gray-700,
+    "800": $gray-800,
+    "900": $gray-900
+  ),
+  $grays
+);
+
+$white: #fff !default;
+$black: #000 !default;
+$blue: #00f !default;
+$indigo: #4b0082 !default;
+$purple: #800080 !default;
+$pink: #ffc0cb !default;
+$red: #f00 !default;
+$orange: #ffa500 !default;
+$yellow: #ff0 !default;
+$green: #008000 !default;
+$teal: #008080 !default;
+$cyan: #0ff !default;
+$gold: #ffd700 !default;
+$silver: #c0c0c0 !default;
+$dodger: #1E90FF !default;
+$royalblue: #4169e1 !default;
+$steelblue: #4682b4 !default;
+$salmon: #fa8072 !default;
+$lime: #0f0 !default;
+$violet: #ee82ee !default;
+$brown: #a52a2a !default;
+$aquamarine: #7fffd4 !default;
+$lavender: #e6e6fa;
+
+$colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$colors: map-merge(
+  (
+    "gray": $gray-600,
+    "white": $white,
+    "black": $black,
+    "blue": $blue,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "teal": $teal,
+    "cyan": $cyan,
+    'gold': $gold,
+    'silver': $silver,
+    'dodger': $dodger,
+    'royalblue': $royalblue,
+    'steelblue': $steelblue,
+    'salmon': $salmon,
+    'lime': $lime,
+    'violet': $violet,
+    'brown': $brown,
+    'aquamarine': $aquamarine,
+    'lavender': $lavender
+  ),
+  $colors
+);
+
+$primary: $dodger !default;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $steelblue !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: #1a202c !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+  ),
+  $theme-colors
+);

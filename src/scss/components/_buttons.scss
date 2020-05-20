@@ -1,0 +1,18 @@
+.btn{
+  display: inline-block;
+  width: 100%;
+  background: rgb(223, 217, 217);
+  border: 3px inset transparent;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  outline: transparent;
+  transition: transform 0.15s ease-in-out;
+
+  &:hover{
+
+  }
+
+  &:active{
+    transform: translateY(0.25rem);
+  }
+}

@@ -1,0 +1,13 @@
+.hero{
+  padding: 1rem;
+
+  > .col{
+    margin: 1rem 0;
+    padding: 1rem;
+    
+    &:not(:first-child){
+      border: 1px solid #ccc;
+      border-radius: 1rem;
+    }
+  }
+}

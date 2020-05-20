@@ -1,0 +1,44 @@
+/* Style the tab */
+.tabs {
+  position: sticky;
+  overflow: hidden;
+  z-index: 10;
+  background: $light;
+  display: flex;
+  justify-content: space-around;
+  top: 40px;
+
+  @include mediaMin(md){
+    top: 50px;
+  }
+
+  /* Style the buttons inside the tab */
+  &__links {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 1rem 0.5rem;
+    transition: 0.3s;
+    font-size: 1.6rem;
+
+    /* Change background color of buttons on hover */
+    &:hover {
+      background-color: #ddd;
+    }
+    
+    /* Create an active/current tablink class */
+    &.active {
+      background-color: #ccc;
+    }
+  }
+}
+
+.tabcontent {
+  display: none;
+  animation: fadeIn 1s;
+
+  &.open{
+    display: block;
+  }
+}

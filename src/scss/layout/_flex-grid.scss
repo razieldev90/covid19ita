@@ -1,0 +1,75 @@
+$grid-colonne: 12;
+
+.row{
+  margin: 0 (-$gutter / 2);
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+
+  &.no-gutter{
+    margin: 0;
+  }
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+  &.vertical{
+    &.reverse {
+      flex-direction: column-reverse;
+    }
+  }
+  &.align-center{ align-items: center; }
+  &.align-start{ align-items: flex-start; }
+  &.align-end{ align-items: flex-end; }
+  &.align-stretch{ align-items: stretch; }
+  &.align-baseline{ align-items: baseline; }
+  &.justify-center{ justify-content: center; }
+  &.justify-start{ justify-content: flex-start; }
+  &.justify-end{ justify-content: flex-end; }
+  &.justify-around{ justify-content: space-around; }
+  &.justify-between{ justify-content: space-between; }
+  &.justify-evenly{ justify-content: space-evenly; }
+}
+
+.col{
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 1rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.top{ align-self: flex-start; }
+  &.bottom{ align-self: flex-end; }
+  &.center{ align-self: center; }
+
+  @for $i from 1 through $grid-colonne{
+    &-#{$i}{
+      flex-basis: 100% / ($grid-colonne / $i);
+      width: 100% / ($grid-colonne / $i);
+    }
+  }
+  @for $i from 1 through $grid-colonne{
+    &-offset-#{$i}{
+      margin-left: 100% / ($grid-colonne / $i);
+    }
+  }
+
+  @each $bp in map-keys($breakpoints){
+    @include mediaMin($bp){
+    @for $i from 1 through $grid-colonne{
+      &-#{$bp}-#{$i}{
+          flex-basis: 100% / ($grid-colonne / $i);
+          width: 100% / ($grid-colonne / $i);
+        }
+      }
+
+      @for $i from 1 through $grid-colonne{
+        &-offset-#{$bp}-#{$i}{
+            margin-left: 100% / ($grid-colonne / $i);
+          }
+        }
+    }
+  }
+}

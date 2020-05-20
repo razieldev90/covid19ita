@@ -1,0 +1,214 @@
+.dato{
+  margin-top: 1rem;
+  font-weight: 500;
+
+  @include mediaMin(lg){
+    margin-top: 0;
+    padding: 1rem 0;
+  }
+
+  &__nome{
+    font-size: 3rem;
+  }
+
+  &__numero{
+    font-weight: 800;
+    font-size: 4rem;
+  }
+
+  &__variazione{
+    font-weight: 800;
+    font-size: 2rem;
+  }
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @include mediaMin(md){
+    font-size: 2rem;
+  }
+
+  > div{
+    margin: 2rem;
+  }
+  h2{
+    margin-bottom: 1rem;
+  }
+}
+main{
+  opacity: 0;
+  animation: fadeIn 1s 2s ease-in-out forwards;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border-top: 7px solid #d2d2d2;
+  border-bottom: 7px solid #a2a2a2;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+.grafico{
+  position: relative;
+  border-radius: 1rem;
+  width: 100%;
+  height: 400px;
+  padding: 1rem;
+
+  &--top5{
+    height: 250px;
+  }
+
+  & > canvas{
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+.table{
+  position: relative;
+  display: block;
+
+  @include mediaMin(md){
+    display: table;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+	& thead, & tbody, & th, & td, & tr { 
+    display: block;    
+  }
+
+  & thead{
+    @include mediaMin(md){
+      display: table-header-group;
+    }
+
+    tr{
+      position: absolute;
+      top: -9999px;
+      left: -9999px;  
+
+      @include mediaMin(md){
+        position: relative;;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  & tbody{
+    @include mediaMin(md){
+      display: table-row-group;
+    }
+  }
+  & tr{
+    border: 1px solid #ccc;
+    padding: 1rem;
+
+    @include mediaMin(md){
+      display: table-row;
+      padding: 0;
+      border: none;
+    }
+
+    &:nth-child(even){
+      background-color: #ddd;
+    }
+  }
+  & th, & td{
+    border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+    padding-left: 60%; 
+
+    @include mediaMin(md){
+      display: table-cell;
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      font-weight: 500;
+
+    }
+  }
+  th{
+
+    @include mediaMin(md){
+      text-align: left;
+      background: #333; 
+      color: white; 
+      font-weight: bold; 
+    }
+  }
+
+  & td{
+
+    &::before { 
+      position: absolute;
+      top: 0;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+
+      @include mediaMin(md){
+        all: initial;
+      }
+    }
+
+    @for $i from 1 through 9{
+      &:nth-of-type(#{$i}):before { 
+        content: attr(data-label); 
+        font-weight: 800;
+
+        @include mediaMin(md){
+          content: '';
+        }
+      }
+    }
+
+    & a{
+      color: rgb(53, 131, 248);
+      
+      &:hover{
+        opacity: 0.75;
+      }
+    }
+  }
+}
+
+
+.grigliaDettaglio{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-size: 1.8rem;
+  
+  & li{
+    text-align: center;
+    padding: 1rem;
+    flex: 1 1 50%;
+  
+    @include mediaMin(md){
+      font-size: 2rem;
+      flex-basis: 25%;
+    }
+  
+    &.titolo{
+      flex-basis: 100%;
+      text-align: center;
+    }
+  }
+}
+
+
+
+
+/*# sourceMappingURL=raziel.css.map */

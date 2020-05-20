@@ -1,0 +1,175 @@
+.container {
+  width: 100%;
+  padding-right: $gutter / 2;
+  padding-left: $gutter / 2;
+  margin-right: auto;
+  margin-left: auto;
+
+  @each $breakpoint in map-keys($breakpoints){
+    @include mediaMin($breakpoint) {
+      max-width: map-get($container-max-widths, $breakpoint);
+    }
+  }
+}
+.container-full {
+  width: 100%;
+  padding-right: $gutter / 2;
+  padding-left: $gutter / 2;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// Set background color
+.bg{
+  @each $key in map-keys($colors){
+    $color: map-get($colors, $key);
+    &-#{$key}{
+      background-color: #{$color};
+    }
+  }
+  @each $key in map-keys($theme-colors){
+    $color: map-get($theme-colors, $key);
+    &-#{$key}{
+      background-color: #{$color} !important;
+    }
+  }
+}
+// Font-weight helpers from 100 to 900
+.font{
+  @for $i from 1 through 9{
+    &-#{$i}00{
+      font-weight: $i * 100;
+    }
+  }
+}
+.text{
+  $aligns: center, left, right, justify;
+  @each $prop in $aligns{
+    &-#{$prop}{
+      text-align: $prop;
+    }
+  }
+
+  $transforms: uppercase, lowercase, capitalize;
+  @each $prop in $transforms{
+    &-#{$prop}{
+      text-transform: $prop;
+    }
+  }
+
+  @each $key in map-keys($colors){
+    $color: map-get($colors, $key);
+    &-#{$key}{
+      color: #{$color};
+    }
+  }
+  @each $key in map-keys($theme-colors){
+    $color: map-get($theme-colors, $key);
+    &-#{$key}{
+      color: #{$color} !important;
+    }
+  }
+}
+
+
+// HIDE CLASSES
+.hide{
+  @each $mq-key in map-keys($breakpoints) {
+    @include mediaMin(#{$mq-key}) {
+      &-#{$mq-key} {
+        display: none;
+      }
+    }
+  }
+}
+
+
+.h{
+  &-25{ height: 25%; }
+  &-50{ height: 50%; }
+  &-75{ height: 75%; }
+  &-100{ height: 100%; }
+}
+.w{
+  &-25{ width: 25%; }
+  &-50{ width: 50%; }
+  &-75{ width: 75%; }
+  &-100{ width: 100%; }
+}
+.mh{
+  &-25{ max-height: 25%; }
+  &-50{ max-height: 50%; }
+  &-75{ max-height: 75%; }
+  &-100{ max-height: 100%; }
+}
+.mw{
+  &-25{ max-width: 25%; }
+  &-50{ max-width: 50%; }
+  &-75{ max-width: 75%; }
+  &-100{ max-width: 100%; }
+}
+
+.display{
+  &-block { display: block; }
+  &-flex { display: flex; }
+  &-inline-block { display: inline-block; }
+  &-inline { display: inline; }
+  &-none { display: none; }
+  &-table { display: table; }
+}
+
+.m{
+  @for $i from 0 through 5{
+    &-#{$i}{
+      margin: #{$i}rem !important;
+    }
+    &x-#{$i}{
+      margin-left: #{$i}rem !important;
+      margin-right: #{$i}rem !important;
+    }
+    &y-#{$i}{
+      margin-top: #{$i}rem !important;
+      margin-bottom: #{$i}rem !important;
+    }
+    &t-#{$i}{
+      margin-top: #{$i}rem !important;
+    }
+    &b-#{$i}{
+      margin-bottom: #{$i}rem !important;
+    }
+    &r-#{$i}{
+      margin-right: #{$i}rem !important;
+    }
+    &l-#{$i}{
+      margin-left: #{$i}rem !important;
+    }
+  }
+}
+
+.p{
+  @for $i from 0 through 5{
+    &-#{$i}{
+      padding: #{$i}rem !important;
+    }
+    &x-#{$i}{
+      padding-left: #{$i}rem !important;
+      padding-right: #{$i}rem !important;
+    }
+    &y-#{$i}{
+      padding-top: #{$i}rem !important;
+      padding-bottom: #{$i}rem !important;
+    }
+    &t-#{$i}{
+      padding-top: #{$i}rem !important;
+    }
+    &b-#{$i}{
+      padding-top: #{$i}rem !important;
+    }
+    &r-#{$i}{
+      padding-right: #{$i}rem !important;
+    }
+    &l-#{$i}{
+      padding-left: #{$i}rem !important;
+    }
+  }
+}

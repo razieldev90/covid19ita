@@ -1,0 +1,83 @@
+.nav {
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+  background: $light;
+  z-index: 10;
+
+  .container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @include mediaMin(md){
+    padding: 0.5rem 1.25rem;
+  }
+
+  &__title{
+    color: $dark;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0.5rem 0;
+    
+    @include mediaMin(sm){
+      margin: 0;
+      flex: 0 1 auto;
+    }
+
+  }
+
+  &__item {
+    flex: 0 0 auto;
+    text-align: center;
+
+    @include mediaMin(md){
+      flex: 0 0 auto;
+    }
+
+    &:not(:first-child) {
+      margin-left: 10px;
+
+      @include mediaMin(md){
+        margin-left: 20px;
+      }
+    }
+  }
+
+  &__link {
+    position: relative;
+    text-decoration: none;
+    margin-bottom: 10px;
+    color: $dark;
+
+    @include mediaMin(md){
+      margin-bottom: 0;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;            
+        height: 1px;
+        bottom: -3px;
+        left: 0;
+        right: 0;
+        background-color: $dark;
+        transform: scaleX(0);
+        transition: transform 0.25s ease-in-out;
+    }
+
+    &:hover {
+      &::before {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

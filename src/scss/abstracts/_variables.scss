@@ -1,0 +1,60 @@
+@import 'colors';
+
+// BREAKPOINS
+$small: 36em;      // 576px
+$medium: 48em;      // 768px
+$large: 64em;       // 1024px
+$xlarge: 87.5em;    // 1400px
+
+$breakpoints: ();
+
+$breakpoints: map-merge(
+  (
+    'sm': $small,
+    'md': $medium,
+    'lg': $large,
+    'xl': $xlarge,
+  ), 
+  $breakpoints
+);
+
+$ff-sans: 'Roboto', sans-serif;
+
+$html-font-size: 62.5%;
+$font-size-base: 1.6rem;
+
+$body-bg: #f2f2f2;
+$body-color: #333;
+$body-font-size: 1.6em;
+
+$link-color: #45b4e0;
+
+
+
+$gutter: 1rem !default;
+
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+  ),
+  $spacers
+);
+
+
+$container-max-widths: (
+  sm: 550px,
+  md: 680px,
+  lg: 900px,
+  xl: 1350px,
+) !default;
+
+
+$headings-margin-bottom:      $spacer / 2 !default;
+$paragraph-margin-bottom:   1rem !default;

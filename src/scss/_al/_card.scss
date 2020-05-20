@@ -1,0 +1,32 @@
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid #E0E0E0;
+  border-radius: 0;
+  background: #FFFFFF;
+  color: #444444;
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+  &__image {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  &__content {
+    padding: 1rem;
+    flex: 1 0 auto;
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  &--clear,
+  &--feature {
+    border: 0;
+  }
+}

@@ -1,0 +1,161 @@
+// $colonne-griglia: 12;
+// $gutter: 1rem !default;
+
+// .row{
+//   @include _row();
+// }
+// @mixin _col {
+//   box-sizing: border-box;
+//   flex-grow: 1;
+//   flex-basis: 0;
+//   max-width: 100% / $colonne-griglia ;
+//   padding: 1rem;
+// }
+// .col{
+//   @include _col();
+// }
+$grid-colonne:   12 !default;
+$grid-nome:   riga !default;
+$grid-col-nome:   col !default;
+$grid-attributeName: class !default;
+$grid-gutter:    1rem !default; // Total left + right
+$grid-gutter-vertical:    1rem !default;
+$grid-mq-width: 'min-width' !default;
+
+// PREPROCESSING
+// Calcolo larghezza di una colonna in percentuale
+$gl-colUnit: (100% / $grid-colonne);
+
+// calculate and store nth portions for grid by columns
+// Calcolo e salvo nth porzioni della griglia per colonne
+$grid-col-porzioni: (
+  0: 0
+);
+@for $i from 1 through $grid-colonne {
+  $grid-col-porzioni: map-merge($grid-col-porzioni, ($i: ($gl-colUnit*$i)));
+}
+
+// calculate and store nth fractions for grid by number
+$grid-col-frazioni: (
+  0: 0 // Avoid division by zero if $i would start at 0
+);
+@for $i from 1 through $grid-colonne {
+  $frazione: 1 / $i;
+  $percentuale-frazione: $frazione * 100%;
+  $grid-col-frazioni: map-merge($grid-col-frazioni, ($frazione: $percentuale-frazione));
+}
+
+
+
+
+// Function to generate the grid by columns
+@mixin makeCol($col)
+{
+  [#{$grid-attributeName}~="#{$grid-nome}"],
+  [#{$grid-attributeName}*="#{$grid-nome}-"],
+  [#{$grid-attributeName}*="#{$grid-nome}_"] {
+    
+    @for $i from 1 through $grid-colonne {
+      > [#{$grid-attributeName}*="#{$col}-#{$i}"]{ flex-basis: map-get($grid-col-porzioni, $i); max-width: map-get($grid-col-porzioni, $i); }
+    }
+  }
+}
+
+// Function to generate the -first & -last base on mq keys (as _lg-first)
+@mixin makeFirstLast($mq)
+{
+  [#{$grid-attributeName}~="#{$grid-nome}"],
+  [#{$grid-attributeName}*="#{$grid-nome}-"],
+  [#{$grid-attributeName}*="#{$grid-nome}_"] {
+    [#{$grid-attributeName}*="#{$mq}-first"]{
+      order: -1;
+    }
+    [#{$grid-attributeName}*="#{$mq}-last"]{
+      order: 1;
+    }
+  }
+}
+
+// Function to generate the offset
+@mixin makeOff($off)
+{
+  [#{$grid-attributeName}~="#{$grid-nome}"],
+  [#{$grid-attributeName}*="#{$grid-nome}-"],
+  [#{$grid-attributeName}*="#{$grid-nome}_"] {
+    @for $i from 0 through $grid-colonne - 1 {
+      > [data-push-left*="#{$off}-#{$i}"]{ margin-left: map-get($grid-col-porzioni, $i); }
+    }
+  }
+
+  [#{$grid-attributeName}~="#{$grid-nome}"],
+  [#{$grid-attributeName}*="#{$grid-nome}-"],
+  [#{$grid-attributeName}*="#{$grid-nome}_"] {
+    @for $i from 0 through $grid-colonne - 1 {
+      > [data-push-right*="#{$off}-#{$i}"]{ margin-right: map-get($grid-col-porzioni, $i); }
+    }
+  }
+}
+
+// GRID
+[#{$grid-attributeName}~="#{$grid-nome}"],
+[#{$grid-attributeName}*="#{$grid-nome}-"],
+[#{$grid-attributeName}*="#{$grid-nome}_"]{
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 (-$grid-gutter/2);
+}
+
+/************************
+    GRID BY NUMBER
+*************************/
+// Generala griglia in base al parent
+// ES <div class="griglia-2"></div> --> Crea una griglia con 2 colonne
+// <div class="griglia-6"></div> --> Crea una griglia con 6 colonne
+@mixin makeGridByNumber($grid)
+{
+  @for $i from 1 through $grid-colonne {
+      [#{$grid-attributeName}*="#{$grid}-#{$i}"] > [#{$grid-attributeName}~="#{$grid-col-nome}"],
+      [#{$grid-attributeName}*="#{$grid}-#{$i}"] > [#{$grid-attributeName}*="#{$grid-col-nome}-"],
+      [#{$grid-attributeName}*="#{$grid}-#{$i}"] > [#{$grid-attributeName}*="#{$grid-col-nome}_"] {
+        $frazione: 1 / $i;
+
+        flex-basis: map-get($grid-col-frazioni, $frazione);
+        max-width: map-get($grid-col-frazioni, $frazione);
+      }
+  }
+}
+@include makeGridByNumber(#{$grid-nome});
+@each $mq-key, $mq-value in $breakpoints {
+  @include mediaMin(#{$mq-key}) {
+  //@media #{$mq-value} {
+    @include makeGridByNumber(_#{$mq-key});
+  }
+}
+
+
+
+
+
+/************************
+    HIDING COLS
+*************************/
+@each $mq-key, $mq-value in $breakpoints {
+  @include mediaMin(#{$mq-key}) {
+    [#{$grid-attributeName}*="#{$mq-key}-hide"] {
+      display: none;
+    }
+  }
+}
+
+
+
+
+// @each $i, $ii in $grid-col-porzioni{
+//   @warn $i + ' ' + $ii;
+// } 
+
+// @each $i, $ii in $grid-col-frazioni{
+//   @warn $i + ' ' + $ii;
+// }
+

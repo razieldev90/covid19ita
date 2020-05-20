@@ -1,0 +1,51 @@
+.header{
+  animation: fadeIn 1s 2s ease-in-out forwards;
+  padding: 2rem 1rem;
+
+  &__titolo{
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+  }
+
+  &__sottotitolo{
+    margin: 2rem 0;
+  }
+  &__timer{
+    margin-bottom: 2rem;
+  }
+
+  .dato{
+
+    @include mediaMin(md){
+      margin: 2rem 0;
+      box-shadow: 0 4px 5px -5px gray;
+    }
+
+    @include mediaMin(lg){
+      box-shadow: 0px 5px 5px -5px #888, 0 -5px 5px -5px #888;
+      margin-top: 0;
+      padding: 1rem 0;
+    }
+
+    &:not(:last-child)::after{
+      content: '';
+      height: 1px;
+      width: 75%;
+      margin: 3rem auto;
+      background: #ccc;
+      display: block;
+
+      @include mediaMin(md){
+        display: none;
+      }
+    }
+
+    &__nome{
+      font-weight: 800;
+    }
+
+    &__numero{
+      font-size: 5rem;
+    }
+  }
+}
